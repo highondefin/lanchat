@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# PyInstaller output
+build/
+dist/
+*.spec
+
+# partial downloads, local test data
+*.part
