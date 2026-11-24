@@ -7,6 +7,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: write  # needed to publish releases
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -37,3 +40,18 @@ jobs:
         with:
           name: LanChat-windows
           path: dist/LanChat.exe
+
+      # Pushing a tag like v1.0.0 publishes a GitHub Release with the exe attached.
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: LanChat ${{ github.ref_name }}
+          files: dist/LanChat.exe
+          generate_release_notes: true
+          body: |
+            **Download `LanChat.exe` below** - a single file, no installation needed (Windows 10/11).
+
+            - Quit IP Messenger on the same PC first (LanChat needs port 2425 to see IPMsg users).
+            - Allow LanChat in Windows Firewall (Private networks): UDP/TCP 50505 and 2425.
+            - Windows SmartScreen may warn because the exe isn't signed: More info -> Run anyway.

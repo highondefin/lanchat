@@ -27,6 +27,9 @@ On Windows use `py -m lanchat`. On Debian/Ubuntu the GUI needs
 
 ### Windows .exe
 
+**Download:** the latest `LanChat.exe` is on the
+[Releases page](https://github.com/highondefin/lanchat/releases/latest).
+
 `dist/LanChat.exe` is a single file that needs no Python: copy it to the PC and
 double-click it. On the first start, Windows Firewall asks whether LanChat may
 use the network: tick **Private networks** and click **Allow access**. Quit IP
@@ -42,6 +45,16 @@ the exe because it has no console.
 - Or let GitHub build it: every push runs the *Test and build* workflow
   (Actions tab). Open the latest run and download the **LanChat-windows**
   artifact. You can also start it by hand with *Run workflow*.
+
+**Releasing a new version** (maintainers): push a version tag, e.g.
+
+```bash
+git tag v1.0.1
+git push origin v1.0.1
+```
+
+The workflow runs the tests, builds `LanChat.exe` and publishes a GitHub
+Release with the exe attached and release notes generated from the commits.
 
 ## Using it
 
